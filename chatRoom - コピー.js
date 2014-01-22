@@ -6,10 +6,10 @@ var server = require.main.exports.server;
 
 var io = require('socket.io').listen(server);
 
-// io.socketsの接続
+// io.socketsの接続2
 io.sockets.on('connection', function (socket) {
 	var query = require.main.exports.query;
-	// 他ユーザに入室情報を送信
+	// 他ユーザに入室情報を送信2
 	socket.broadcast.emit('enter', query.userName);
 
 	socket.on('msg', function (data) {
@@ -17,7 +17,7 @@ io.sockets.on('connection', function (socket) {
 	});
 
 	socket.on('exit', function (data) {
-		// 他ユーザに退室情報を送信
+		// 他ユーザに退室情報を送信2
 		socket.broadcast.emit('exit', query.userName);
 	});
 });
