@@ -12,7 +12,7 @@
   
     // 投稿ボタン押下
     $('#write').on('click', function() {
-      socket.emit('msg', $('#userName').val() + 'さん：' + $('#msg').val());
+      socket.emit('msg', $('#userName').val() + 'さま：' + $('#msg').val());
       $('#msg').val('');
       return false;
     });

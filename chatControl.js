@@ -3,7 +3,7 @@ var http = require('http');
 var ejs = require('ejs');
 var url = require('url');
 var querystring = require('querystring');
-var settings = require('../setting.js');  // 当ファイルからの相対パス3
+var settings = require('../setting.js');  // 当ファイルからの相対パス４
 
 console.log(settings);
 
