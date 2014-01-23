@@ -6,7 +6,7 @@ var server = require.main.exports.server;
 
 var io = require('socket.io').listen(server);
 
-// io.socketsの接続
+// io.socketsの接続。
 io.sockets.on('connection', function (socket) {
 	var query = require.main.exports.query;
 	// 他ユーザに入室情報を送信
