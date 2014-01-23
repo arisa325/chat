@@ -15,7 +15,7 @@ var query;
 function onRequest(req, res) {
 	console.log('------- onRequest -------');
 
-	// パラメータを取得してページ表示
+	// パラメータを取得してページ表示します。
 	if (req.method == 'GET') {
 		console.log('GET!!');
 	  query = url.parse(req.url, true).query;
