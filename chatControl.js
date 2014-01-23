@@ -3,7 +3,7 @@ var http = require('http');
 var ejs = require('ejs');
 var url = require('url');
 var querystring = require('querystring');
-var settings = require('../setting.js');  // 当ファイルからの相対パス４
+var settings = require('../setting.js');  // 当ファイルからの相対パス
 
 console.log(settings);
 
@@ -15,7 +15,7 @@ var query;
 function onRequest(req, res) {
 	console.log('------- onRequest -------');
 
-	// パラメータを取得してページ表示3
+	// パラメータを取得してページ表示
 	if (req.method == 'GET') {
 		console.log('GET!!');
 	  query = url.parse(req.url, true).query;

@@ -12,11 +12,11 @@
   
     // 投稿ボタン押下
     $('#write').on('click', function() {
-      socket.emit('msg', $('#userName').val() + 'さま：' + $('#msg').val());
+      socket.emit('msg', $('#userName').val() + 'さん：' + $('#msg').val());
       $('#msg').val('');
       return false;
     });
-aaaa
+
     // 退室ボタン押下
     $('#exit').on('click', function() {
       socket.emit('exit', $('#userName').val());
@@ -26,17 +26,17 @@ aaaa
     // socket.ioの処理開始
     var socket = io.connect();
 
-    // 入室3
+    // 入室
     socket.on('enter', function (data) {
       $('#thread').prepend(data + 'さんが入室しました。<br>');
     });
 
-    // 退室3
+    // 退室
     socket.on('exit', function (data) {
       $('#thread').prepend(data + 'さんが退室しました。<br>');
     });
 
-    // 投稿2
+    // 投稿
     socket.on('msg', function (data) {
       $('#thread').prepend(data + '<br>');
     });
