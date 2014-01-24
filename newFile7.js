@@ -11,4 +11,7 @@ hogehoge
 fffffd
 aaaaaaaaaaaaaaa
 bbbbbbbbbbbbb
-CCCCCCCC
+aaaaaaaaaaa
+aaaaaaaaaa
+aaaaaaa
+ｃｃｃｃｃｃｃｃあいうえお
