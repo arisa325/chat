@@ -3,7 +3,9 @@ var http = require('http');
 var ejs = require('ejs');
 var url = require('url');
 var querystring = require('querystring');
-var settings = require('../setting.js');  // 当ファイルからの相対パス
+var path = require('path');
+var paths = process.cwd().split(path.sep);
+var settings = require(path.join(path.sep, paths[1], paths[2], paths[3], 'setting.js'));
 
 console.log(settings);
 
@@ -43,11 +45,10 @@ function setQeuryString(req, res) {
 }
 
 function showPage(req, res) {
-	var path = req.url;
-	console.log('Path = ' + path);
+	console.log('Path = ' + req.url);
 	module.exports.query = query;
 
-	switch (path) {
+	switch (req.url) {
 		// ログイン画面を開く
 		case '/':
 			data = fs.readFileSync('./chatIndex.html');  // 相対パス指定時は実行ディレクトリからの相対パスとなる
@@ -58,14 +59,13 @@ function showPage(req, res) {
 		// チャットルームを開く
 		case '/room':
 			require('./chatRoom.js');
-			ejsData = fs.readFileSync('./chatRoom.ejs', 'UTF-8');
-			data = ejs.render(ejsData, {userName : query.userName});
+			data = fs.readFileSync('./chatRoom.ejs', 'UTF-8');
 			res.writeHead(200, {'Content-Type': 'text/html; charset=UTF-8'});
 			res.end(data);
 			break;
 
 		default:
-			console.log('File ' + path + ' is not found!!');
+			console.log('File ' + req.url + ' is not found!!');
 			return;
 			break;
 	}
