@@ -15,12 +15,17 @@
 </style>
 </head>
 <body>
-<form method="POST">
+<form action="/room" method="POST" >
   <div class="row">
-    <h1></h1>
+    <h1>Node Chat サンプル</h1>
   </div>
   <div class="row">
-    <input type="submit" value="入室する" class="btn btn-info">
+    <label>ユーザ名<br>
+    <input type="text" name="userName">
+    </label>
+  </div>
+  <div class="row">
+    <input type="submit" id="submitButton" value="入室する" class="btn btn-info">
   </div>
 </form>
 <div>

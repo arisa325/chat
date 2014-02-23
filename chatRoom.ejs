@@ -7,6 +7,21 @@
 <script src="//ajax.googleapis.com/ajax/libs/jquery/1.10.2/jquery.min.js"></script>
 <script src="//netdna.bootstrapcdn.com/bootstrap/3.0.3/js/bootstrap.min.js"></script>
 <script src="/socket.io/socket.io.js"></script>
+<script>
+  $(function () {
+
+    // // socket.ioの処理開始
+    // var socket = io.connect();
+
+    // // event1イベントを受信
+    // socket.on('event1', function (data) {
+
+    //   var rc = prompt(data);
+
+    //   //###############
+    // });
+  });
+</script>
 <style>
 .row {
   width: 500px;
@@ -18,10 +33,19 @@
 <body>
 <form method="post">
   <div class="row">
-    <h1></h1>
+    <h1>Node Chat Room</h1>
   </div>
   <div class="row">
-    loginUser
+    ログインユーザ：<%= data %>さん
+  </div>
+  <div class="row">
+    <textarea rows="4"></textarea>
+  </div>
+  <div class="row">
+    <input type="button" id="tokoButton" value="投稿" class="btn btn-info">
+  </div>
+  <div class="row">
+    <input type="button" id="exitButton" value="退室する" class="btn btn-info">
   </div>
 </form>
 <div>
