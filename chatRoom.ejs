@@ -8,18 +8,64 @@
 <script src="//netdna.bootstrapcdn.com/bootstrap/3.0.3/js/bootstrap.min.js"></script>
 <script src="/socket.io/socket.io.js"></script>
 <script>
+
+  $(document).ready(function(){
+
+    //socket.ioの処理開始
+    var socket = io.connect();
+
+    /*
+      サーバ側にリクエストを送る処理
+    */
+    // 「入室する」ボタン押下後の遷移画面の初期表示処理。
+    // サーバ側にログイン者名を送る。
+    var userName = $("#userName").val();
+    socket.emit("enterEvent", userName);
+  });
+
   $(function () {
 
-    // // socket.ioの処理開始
-    // var socket = io.connect();
+    //socket.ioの処理開始
+    var socket = io.connect();
 
-    // // event1イベントを受信
-    // socket.on('event1', function (data) {
+    /*
+      サーバ側にリクエストを送る処理
+    */
 
-    //   var rc = prompt(data);
+    // 「投稿」ボタンを押下。サーバ側に投稿情報とログイン者名を送る。
+    $("#tokoButton").click(function(){
+      var tokoContent = $("#tokoContent").val();
+      var userName = $("#userName").val();
+      socket.emit("tokoEvent", tokoContent, userName);
+      $("#tokoContent").val('');
+    });
 
-    //   //###############
-    // });
+    // 「退出する」ボタンを押下。サーバ側にログイン者名を送る。
+    $("#exitButton").click(function(){
+      var userName = $("#userName").val();
+      socket.emit("exitEvent", userName);
+    });
+
+
+    /*
+      サーバ側から送られてきたレスポンス受け取る処理。画面に表示する。
+    */
+
+    // サーバ側からの投稿コメントを受け取る。コメント一覧の冒頭に付け加える
+    socket.on('tokoComment', function (msg, userName) {
+      $("#commentList").prepend("<div>" + userName + "さん：" + msg + "</div>");
+    });
+
+    // サーバ側からの退出コメントを受け取る。コメント一覧の冒頭に付け加える
+    socket.on('exitComment', function (userName) {
+      $("#commentList").prepend("<div>" + userName + "さんが退出しました。" + "</div>");
+    });
+
+    // サーバ側からの入室コメントを受け取る。コメント一覧の冒頭に付け加える
+    socket.on('enterComment', function (userName) {
+      $("#commentList").prepend("<div>" + userName + "さんが入室しました。" + "</div>");
+    });
+
   });
 </script>
 <style>
@@ -31,7 +77,8 @@
 </style>
 </head>
 <body>
-<form method="post">
+<form action="/" method="post">
+  <input type="hidden" id="userName" value="<%= data %>">
   <div class="row">
     <h1>Node Chat Room</h1>
   </div>
@@ -39,13 +86,15 @@
     ログインユーザ：<%= data %>さん
   </div>
   <div class="row">
-    <textarea rows="4"></textarea>
+    <textarea rows="4" id="tokoContent" placeholder="投稿文を入力してください"></textarea>
   </div>
   <div class="row">
     <input type="button" id="tokoButton" value="投稿" class="btn btn-info">
   </div>
+  <div class="row" id="commentList">
+  </div>
   <div class="row">
-    <input type="button" id="exitButton" value="退室する" class="btn btn-info">
+    <input type="submit" id="exitButton" value="退室する" class="btn btn-info">
   </div>
 </form>
 <div>

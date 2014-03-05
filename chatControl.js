@@ -58,8 +58,6 @@ function showPage(req, res) {
 
 		// チャットルームを開く
 		case '/room':
-		console.log(query);
-
 			require('./chatRoom.js');
 			data = fs.readFileSync('./chatRoom.ejs', 'UTF-8');
 			var content = ejs.render(data, {
